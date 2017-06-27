@@ -1,4 +1,4 @@
-package info.androidhive.firebase;
+package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 
 import android.content.Intent;
 import android.os.Bundle;
