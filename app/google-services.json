@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1079736002811",
+    "firebase_url": "https://mse1-23fbd.firebaseio.com",
+    "project_id": "mse1-23fbd",
+    "storage_bucket": "mse1-23fbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079736002811:android:8d888e3516364b89",
+        "android_client_info": {
+          "package_name": "de.unidue.mse.thewesleycrusher.schnitzeljagd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079736002811-hk3q3ia145elhin8v5bt0temu6al4e9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "de.unidue.mse.thewesleycrusher.schnitzeljagd",
+            "certificate_hash": "a12b390750299ee147093a0c9f3c4c2edc8dddf5"
+          }
+        },
+        {
+          "client_id": "1079736002811-jlv8jm1o97er2v3itgs8dect7mjdjg7h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiLgdm4DbWFgVDz0slSKJKxXj0MqIIcgo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079736002811-jlv8jm1o97er2v3itgs8dect7mjdjg7h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
