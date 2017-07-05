@@ -21,10 +21,27 @@
     </activity>
 
         <uses-permission android:name="android.permission.INTERNET" />
+
         <activity android:name=".ResetPasswordActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings">
+
+        </activity>
+
+        <activity android:name=".AuswahlRouteActivity" />
+
+        <activity android:name=".MapsActivity" />
+
+        <activity android:name=".NewGameActivity" />
+
+        <activity android:name=".RestartActivity"/>
+
+        <activity android:name=".MainActivity"/>
+
+
+
+
     </application>
 
 </manifest>

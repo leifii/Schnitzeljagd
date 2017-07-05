@@ -34,29 +34,29 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <Button
-                android:id="@+id/button4"
-                android:layout_width="146dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Menü"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="386dp" />
-
-            <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_start"
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Start"
                 tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="231dp" />
+                tools:layout_editor_absoluteY="386dp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button_laden"
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Laden"
+                tools:layout_editor_absoluteX="148dp"
+                tools:layout_editor_absoluteY="231dp" />
+
+            <Button
+                android:id="@+id/button_einstellungen"
+                android:layout_width="146dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Einstellungen"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="500dp" />
 
