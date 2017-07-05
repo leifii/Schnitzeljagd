@@ -3,6 +3,7 @@ package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,6 +22,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
        Button einstellungen = (Button) findViewById(R.id.button_einstellungen);
         einstellungen.setOnClickListener(this);
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
     }
 
 
@@ -29,7 +34,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
 
             case R.id.button_start:
-                startActivity(new Intent(StartActivity.this, MapsActivity.class));
+                startActivity(new Intent(StartActivity.this, AuswahlRouteActivity.class));
                 break;
 
             case R.id.button_laden:
@@ -41,4 +46,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
+
+
+
 }
