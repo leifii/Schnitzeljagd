@@ -22,9 +22,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
        Button einstellungen = (Button) findViewById(R.id.button_einstellungen);
         einstellungen.setOnClickListener(this);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+      
 
     }
 
