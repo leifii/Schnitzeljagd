@@ -62,7 +62,7 @@
             tools:layout_editor_absoluteY="500dp" />
 
             <Button
-                android:id="@+id/btNeuesSpiel"
+                android:id="@+id/butteon_neuesspiel"
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
