@@ -24,40 +24,55 @@
             android:scaleType="centerCrop"
             app:srcCompat="@color/colorAccent"
             android:layout_height="300dp" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal">
             <Button
                 android:id="@+id/button_setgps"
-                android:layout_width="125dp"
-                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="140dp"
+                android:layout_height="75dp"
                 android:text="GPS"
-                tools:layout_editor_absoluteX="201dp"
-                tools:layout_editor_absoluteY="353dp" />
+ />
             <Button
                 android:id="@+id/button_nextstop"
-                android:layout_width="125dp"
-                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="140dp"
+                android:layout_height="75dp"
                 android:text="Nächster Stop"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="432dp" />
+ />
+</LinearLayout>
 
-    <Button
-        android:id="@+id/btPhoto"
-        android:layout_width="125dp"
-        android:layout_height="54dp"
-        android:text="Foto"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="353dp" />
-
-
-    <Button
-        android:id="@+id/btAbschließen"
-        android:layout_width="125dp"
-        android:layout_height="54dp"
-        android:text="Abschließen"
-        tools:layout_editor_absoluteX="201dp"
-        tools:layout_editor_absoluteY="432dp" />
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/button_setphoto"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="140dp"
+                android:layout_height="75dp"
+                android:text="Foto aufnehmen"
+                />
+            <Button
+                android:id="@+id/button_abschließen"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="140dp"
+                android:layout_height="75dp"
+                android:text="Abschließen"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
