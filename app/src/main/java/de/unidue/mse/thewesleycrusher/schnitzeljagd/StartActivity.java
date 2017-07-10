@@ -21,6 +21,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         laden.setOnClickListener(this);
        Button einstellungen = (Button) findViewById(R.id.button_einstellungen);
         einstellungen.setOnClickListener(this);
+        Button neuesspiel = (Button) findViewById(R.id.button_neuesspiel );
+        neuesspiel.setOnClickListener(this);
 
       
 
@@ -41,6 +43,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.button_einstellungen:
                 startActivity(new Intent(StartActivity.this, SettingsActivity.class));
+                break;
+
+            case R.id.button_neuesspiel:
+                startActivity(new Intent(StartActivity.this, NewGameActivity.class));
                 break;
         }
     }
