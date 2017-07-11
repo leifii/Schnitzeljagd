@@ -7,11 +7,11 @@
     tools:context="de.unidue.mse.thewesleycrusher.schnitzeljagd.NewGameActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="344dp"
         android:layout_height="800dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="8dp"
         android:weightSum="1">
 
         <ImageView
