@@ -161,6 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
+                //beautiful
 
                 //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this,
