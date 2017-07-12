@@ -53,11 +53,11 @@
                 tools:layout_editor_absoluteY="231dp" />
 
             <Button
-            android:id="@+id/button_einstellungen"
+            android:id="@+id/button_anleitung"
             android:layout_width="146dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Einstellungen"
+            android:text="Anleitung"
             tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="500dp" />
 

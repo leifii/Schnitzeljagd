@@ -15,8 +15,7 @@
 
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.location.network" />
-    <uses-feature android:name="android.hardware.camera2.full"/>
-
+    <uses-feature android:name="android.hardware.camera2.full" />
 
     <application
         android:allowBackup="true"
@@ -33,12 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
         <activity android:name=".AuswahlRouteActivity" />
         <activity android:name=".NewGameActivity" />
         <activity android:name=".RestartActivity" />
@@ -59,7 +52,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".CameraActivity"></activity>
+
+        <activity android:name=".Anleitung"></activity>
     </application>
 
 </manifest>
