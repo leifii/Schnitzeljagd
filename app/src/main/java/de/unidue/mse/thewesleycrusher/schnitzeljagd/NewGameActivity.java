@@ -153,7 +153,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
 
@@ -170,6 +169,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
         Button naechster = (Button) findViewById(R.id.button_nextstop);
         foto.setOnClickListener(this);
+
+        Button hinweis =(Button) findViewById(R.id.button_setText);
+        hinweis.setOnClickListener(this);
 
         Button ende = (Button) findViewById(R.id.button_abschließen);
         foto.setOnClickListener(this);
@@ -190,10 +192,11 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 getLoc();
                 break;
             case R.id.button_nextstop:
-
                 break;
             case R.id.button_abschließen:
-
+                break;
+            case R.id.button_setText:
+                startActivity(new Intent(NewGameActivity.this,HinweisActivity.class));
                 break;
 
         }
