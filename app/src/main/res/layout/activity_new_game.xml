@@ -15,7 +15,7 @@
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView_bildAnzeige"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
