@@ -6,73 +6,73 @@
     android:layout_height="match_parent"
     tools:context="de.unidue.mse.thewesleycrusher.schnitzeljagd.NewGameActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="344dp"
-        android:layout_height="800dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp"
-        android:weightSum="1">
+        android:weightSum="1"
+>
 
-        <ImageView
-            android:id="@+id/imageView_bildAnzeige"
-            android:layout_marginTop="20dp"
+        <TextureView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1.30" />
+        <LinearLayout
             android:layout_width="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@color/colorAccent"
-            android:layout_height="300dp" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="horizontal">
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/button_setgps"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="140dp"
                 android:layout_height="75dp"
-                android:text="GPS"
- />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:text="GPS" />
+
             <Button
                 android:id="@+id/button_nextstop"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="140dp"
                 android:layout_height="75dp"
-                android:text="Nächster Stop"
- />
-</LinearLayout>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Nächster Stop" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/button_setphoto"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
                 android:layout_width="140dp"
                 android:layout_height="75dp"
-                android:text="Foto aufnehmen"
-                />
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Foto aufnehmen" />
+
             <Button
                 android:id="@+id/button_abschließen"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
                 android:layout_width="140dp"
                 android:layout_height="75dp"
-                android:text="Abschließen"
-                />
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Abschließen" />
         </LinearLayout>
 
     </LinearLayout>
+
+
 </android.support.constraint.ConstraintLayout>
