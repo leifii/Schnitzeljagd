@@ -3,9 +3,7 @@ package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -16,8 +14,6 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.TotalCaptureResult;
-import android.hardware.camera2.params.InputConfiguration;
-import android.hardware.camera2.params.OutputConfiguration;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
@@ -25,9 +21,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Size;
 import android.view.Surface;
@@ -99,7 +93,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     private Handler handler;
     private HandlerThread hThread;
 
-
     private void createPreview() {
         try {
             SurfaceTexture tex = tv1.getSurfaceTexture();
@@ -133,7 +126,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         }
     }
 
-
     private void openCam() {
         CameraManager camMan =(CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try{
@@ -151,7 +143,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

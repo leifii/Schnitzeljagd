@@ -35,9 +35,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         einstellungen.setOnClickListener(this);
         Button neuesspiel = (Button) findViewById(R.id.button_neuesspiel );
         neuesspiel.setOnClickListener(this);
-
-      
-
     }
 
 
@@ -58,7 +55,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button_neuesspiel:
-                startActivity(new Intent(StartActivity.this, NewGameActivity.class));
+                startActivity(new Intent(StartActivity.this, EntwicklerLoginActivity.class));
                 break;
         }
 
