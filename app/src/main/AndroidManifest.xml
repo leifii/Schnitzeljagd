@@ -15,8 +15,7 @@
 
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.location.network" />
-    <uses-feature android:name="android.hardware.camera2.full"/>
-
+    <uses-feature android:name="android.hardware.camera2.full" />
 
     <application
         android:allowBackup="true"
@@ -26,24 +25,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity">
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AuswahlRouteActivity"
+                    android:screenOrientation="portrait"/>
+        <activity android:name=".NewGameActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RestartActivity"
+            android:screenOrientation="portrait"/>
 
-
-
+        <activity android:name=".EntwicklerLoginActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".AuswahlRouteActivity" />
-        <activity android:name=".NewGameActivity" />
-        <activity android:name=".RestartActivity" />
-        <activity android:name=".MainActivity" />
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
 
+        <activity android:name=".Anleitung"
+            android:screenOrientation="portrait"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,10 +61,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".CameraActivity"></activity>
+
     </application>
 
 </manifest>
