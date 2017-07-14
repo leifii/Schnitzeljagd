@@ -1,5 +1,6 @@
 package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -12,6 +13,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.Manifest;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -31,7 +34,7 @@ import com.google.android.gms.location.LocationListener;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,View.OnClickListener {
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
@@ -44,6 +47,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Button start = (Button) findViewById(R.id.button_hinweis);
+        start.setOnClickListener(this);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -215,10 +221,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public float getDistance(Location location){
 
-        float distance = getDistance(location);
-        return distance;
 
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.button_hinweis:
+                startActivity(new Intent(MapsActivity.this, HinweisActivity.class));
+                break;
+        }
     }
 }
