@@ -141,13 +141,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
 
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-
-    }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
