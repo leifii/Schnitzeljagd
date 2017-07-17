@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context="de.unidue.mse.thewesleycrusher.schnitzeljagd.HinweisActivity">
 
+    <LinearLayout
+        android:layout_width="395dp"
+        android:layout_height="800dp"
+        android:orientation="vertical"
+>
+
+        <TextView
+            android:id="@+id/textView_Hinweis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Bitte fügen Sie einen Hinweis hinzu!!!" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Hinweis" />
+
+        <Button
+            android:id="@+id/button_hinweisEnter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Enter" />
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
