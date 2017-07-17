@@ -1,23 +1,12 @@
 package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
