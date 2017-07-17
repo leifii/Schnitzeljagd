@@ -12,7 +12,8 @@
         android:layout_height="495dp"
         android:text="@string/anleitung"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        android:padding="2dp"/>
 
 
 </android.support.constraint.ConstraintLayout>
