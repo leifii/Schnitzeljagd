@@ -115,4 +115,28 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="anleitung">
+
+    Anleitung\n\n
+
+    1. Möchten Sie ein Spiel starten, können Sie unter START ein neues Spiel starten oder unter LADEN ein bereits angefangenes Spiel fortsetzten.\n\n
+
+    1.2 Nachdem Sie START gedrückt haben, erscheint eine Auswahl an Routen, die Sie auswählen können.\n\n
+
+    1.3 Haben Sie eine Route ausgewählt, erscheint eine Karte, die Ihnen anzeigt, wo Sie sich im Moment befinden. Damit Sie immer den aktuellen Standort sehen, muss zu jederzeit Ihr GPS aktiviert sein.\n\n
+
+    1.4 Auf der Karten unten sehen Sie einen Button HINWEIS. Wenn Sie diesen auswählen, erscheint der Hinweis zu Ihrem nächsten Ziel, welches Sie aufsuchen sollen.\n\n
+
+    1.5. Sie können jederzeit zurück zur Karte oder zum Menü, indem Sie den Button ZURÜCK oben in der Leiste drücken.\n\n
+
+
+    2. Möchten Sie eine neue Route erstellen, klicken Sie auf NEUES SPIEL.\n\n
+
+    2.1 Nun können Sie einen Hinweistext, Koordinaten und ein Bild hinzufügen. Danach ist es Ihnen möglich einen neuen Stop hinzuzufügen oder die Route abzuschließen.\n\n
+
+    Viel Spaß beim Spielen!\n\n
+
+    </string>
+
 </resources>

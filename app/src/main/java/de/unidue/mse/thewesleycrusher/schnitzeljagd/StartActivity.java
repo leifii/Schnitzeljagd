@@ -51,7 +51,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button_anleitung:
-                startActivity(new Intent(StartActivity.this, Anleitung.class));
+                startActivity(new Intent(StartActivity.this, AnleitungActivity.class));
                 break;
 
             case R.id.button_neuesspiel:
