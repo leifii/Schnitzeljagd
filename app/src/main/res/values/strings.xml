@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Schnitzeljagd</string>
-    <string name="action_sign_in_short">Register</string>
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
