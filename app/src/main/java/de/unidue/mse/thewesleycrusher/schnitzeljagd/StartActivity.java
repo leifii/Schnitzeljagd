@@ -1,7 +1,10 @@
 package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +13,7 @@ import android.widget.Button;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
-    
+    public final int REQUEST_ID = 200;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button_neuesspiel:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                        ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(StartActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_ID);
+                }
                 startActivity(new Intent(StartActivity.this, EntwicklerLoginActivity.class));
                 break;
         }

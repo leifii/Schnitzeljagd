@@ -326,9 +326,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             }
 
         };
-    checkLoc();
+    checkPem();
     }
-    void checkLoc(){
+    void checkPem(){
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -343,7 +343,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode){
             case 10:
-                checkLoc();
+                checkPem();
                 break;
             default:
                 break;
