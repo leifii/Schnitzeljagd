@@ -233,6 +233,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 if(checkName()) {
                     if (checkHinweis()) {
                         gamFi.setName(name);
+                        gamFiWri.writeGameFile();
                     } else {
                         Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
                     }
