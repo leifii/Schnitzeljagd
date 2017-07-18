@@ -96,6 +96,7 @@ public class Gamefilewriter {
                 // TODO add correct directory!
                 //getting the path for the directory to save to file in
                 String myDirectory = Environment.getExternalStorageDirectory().getAbsolutePath()+"/schnitzeljagd";
+
                 //creating the file
                 File dir = new File (myDirectory, gftw.getName());
 

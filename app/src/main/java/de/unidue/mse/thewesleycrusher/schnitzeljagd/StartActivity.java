@@ -4,11 +4,14 @@ package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.File;
 
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +29,16 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         anleitung.setOnClickListener(this);
         Button neuesspiel = (Button) findViewById(R.id.button_neuesspiel );
         neuesspiel.setOnClickListener(this);
+
+
+
+
+        //Check wether Directory to save data to exists, if it does not exist, it will be created
+        String myDirectoryPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File directory = new File(myDirectoryPath, "Schnitzeljagd");
+        if(!directory.exists()){
+            directory.mkdir();
+        }
     }
 
 
