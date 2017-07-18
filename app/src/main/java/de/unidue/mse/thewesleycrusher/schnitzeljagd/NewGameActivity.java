@@ -165,6 +165,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
+
+        gamFi = new Gamefile();
+        gamFiWri = new Gamefilewriter(gamFi);
         step =1 ;
        // getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -186,7 +189,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
         Button ende = (Button) findViewById(R.id.button_abschließen);
         foto.setOnClickListener(this);
-
 
 
 
