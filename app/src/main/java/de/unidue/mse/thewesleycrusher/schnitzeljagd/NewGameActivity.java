@@ -55,6 +55,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     private LocationListener locLis;
 
     private Gamefile gamFi;
+    private Gamefilewriter gamFiWri;
 
     public final int REQUEST_ID = 200;
     private TextureView tv1;
@@ -222,7 +223,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_setText:
-                if(checkName()== true)
+                if(checkName())
                     // bla bla Methode
                    ;
                 else
@@ -237,7 +238,8 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         String chname ;
         EditText name = (EditText) findViewById(R.id.editText_Name);
         chname = name.getEditableText().toString();
-        if (chname == "Name des Spiels eingeben" || chname == null)
+
+        if (chname.equalsIgnoreCase("Name des Spiels eingeben"))
         return false;
         else{
             return true;
