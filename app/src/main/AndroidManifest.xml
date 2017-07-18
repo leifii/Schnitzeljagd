@@ -36,29 +36,33 @@
         </activity>
         <activity
             android:name=".AuswahlRouteActivity"
+            android:label="Auswahl Schnitzeljagd"
             android:screenOrientation="portrait" />
         <activity
             android:name=".NewGameActivity"
+            android:label="Schnitzeljagd"
             android:screenOrientation="portrait" />
         <activity
             android:name=".RestartActivity"
+            android:label="Schnitzeljagd"
             android:screenOrientation="portrait" />
         <activity
             android:name=".EntwicklerLoginActivity"
+            android:label="Entwickler Login"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
+            android:label="Karte"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".AnleitungActivity"
             android:label="Anleitung"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".HinweisActivity"
+            android:label="Hinweis"
             android:screenOrientation="portrait"/>
 
 

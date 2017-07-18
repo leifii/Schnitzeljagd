@@ -21,7 +21,7 @@ public class AnleitungActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anleitung);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(32,192,4)));
+
 
     }
 

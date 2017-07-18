@@ -30,6 +30,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Size;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -155,6 +156,8 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         hThread = new HandlerThread("Background Handler");
         hThread.start();
@@ -178,6 +181,10 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
         tv1 = (TextureView) findViewById(R.id.tv1);
         tv1.setSurfaceTextureListener(tv1Listener);
+
+
+
+
 
 
     }
@@ -349,6 +356,26 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+    }
+
+
 }
 
 
