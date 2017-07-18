@@ -156,13 +156,11 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
 
         hThread = new HandlerThread("Background Handler");
         hThread.start();
         handler = new Handler(hThread.getLooper());
-
 
         Button foto = (Button) findViewById(R.id.button_setphoto);
         foto.setOnClickListener(this);
@@ -182,11 +180,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         tv1 = (TextureView) findViewById(R.id.tv1);
         tv1.setSurfaceTextureListener(tv1Listener);
 
-
-
-
-
-
     }
 
     public void onClick(View v) {
@@ -203,7 +196,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_abschließen:
                 break;
             case R.id.button_setText:
-                startActivity(new Intent(NewGameActivity.this,HinweisActivity.class));
+                startActivity(new Intent(NewGameActivity.this, HinweisActivity.class));
                 break;
 
         }
