@@ -35,6 +35,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
@@ -47,10 +48,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class NewGameActivity extends Activity implements View.OnClickListener {
 
     private LocationManager locMan;
     private LocationListener locLis;
+
+    private Gamefile gamFi;
 
     public final int REQUEST_ID = 200;
     private TextureView tv1;
@@ -179,6 +183,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         Button ende = (Button) findViewById(R.id.button_abschließen);
         foto.setOnClickListener(this);
 
+
+
+
         tv1 = (TextureView) findViewById(R.id.tv1);
         tv1.setSurfaceTextureListener(tv1Listener);
 
@@ -188,26 +195,27 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.button_setphoto:
-                if(checkName()== true)
+                if(checkName())
                 takePicture();
+
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_setgps:
-                if(checkName()== true)
+                if(checkName())
                     getLoc();
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_nextstop:
-                if(checkName()== true)
+                if(checkName())
                     // bla bla methode
                     ;
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_abschließen:
-                if(checkName()== true)
+                if(checkName())
                     // bla bla Methode
                    ;
                 else
@@ -226,7 +234,14 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     }
 
     public boolean checkName (){
-        return true;
+        String chname ;
+        EditText name = (EditText) findViewById(R.id.editText_Name);
+        chname = name.getEditableText().toString();
+        if (chname == "Name des Spiels eingeben" || chname == null)
+        return false;
+        else{
+            return true;
+        }
     }
 
     private void takePicture() {
