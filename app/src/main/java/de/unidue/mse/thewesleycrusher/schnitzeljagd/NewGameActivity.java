@@ -118,7 +118,10 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-
+        File myDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"schnitzeljagd");
+        if (!myDirectory.exists()){
+            myDirectory.mkdir();
+        }
         gamFi = new Gamefile();
         gamFiWri = new Gamefilewriter(gamFi);
         step =1 ;
