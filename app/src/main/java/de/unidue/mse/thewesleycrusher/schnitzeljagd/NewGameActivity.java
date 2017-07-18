@@ -121,6 +121,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         File myDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"schnitzeljagd");
         if (!myDirectory.exists()){
             myDirectory.mkdir();
+
         }
         gamFi = new Gamefile();
         gamFiWri = new Gamefilewriter(gamFi);
