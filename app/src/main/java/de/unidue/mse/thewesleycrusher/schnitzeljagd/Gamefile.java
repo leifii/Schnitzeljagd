@@ -20,7 +20,7 @@ public class Gamefile {
         this.name=name;
 
 
-        //////Setter for necessary information to create a "Schnitzeljagd"
+        //////Setter for the necessary information to create a "Schnitzeljagd"
 
     }
     public void setLongitude1(double longitude){
