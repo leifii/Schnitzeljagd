@@ -87,6 +87,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     String camID;
     Size imageSize;
     Integer step ;
+    String hinweis;
     private CameraDevice camera;
     private CameraDevice.StateCallback stateCallBack = new CameraDevice.StateCallback() {
 
@@ -111,6 +112,41 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     private CaptureRequest.Builder captBuilder;
     private Handler handler;
     private HandlerThread hThread;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_game);
+
+        gamFi = new Gamefile();
+        gamFiWri = new Gamefilewriter(gamFi);
+        step =1 ;
+       // getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        hThread = new HandlerThread("Background Handler");
+        hThread.start();
+        handler = new Handler(hThread.getLooper());
+
+        Button foto = (Button) findViewById(R.id.button_setphoto);
+        foto.setOnClickListener(this);
+
+        Button gps = (Button) findViewById(R.id.button_setgps);
+        gps.setOnClickListener(this);
+
+        Button naechster = (Button) findViewById(R.id.button_nextstop);
+        foto.setOnClickListener(this);
+
+        Button hinweis =(Button) findViewById(R.id.button_setText);
+        hinweis.setOnClickListener(this);
+
+        Button ende = (Button) findViewById(R.id.button_abschließen);
+        foto.setOnClickListener(this);
+
+        tv1 = (TextureView) findViewById(R.id.tv1);
+        tv1.setSurfaceTextureListener(tv1Listener);
+
+    }
 
     private void createPreview() {
         try {
@@ -159,42 +195,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_game);
-
-        gamFi = new Gamefile();
-        gamFiWri = new Gamefilewriter(gamFi);
-        step =1 ;
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        hThread = new HandlerThread("Background Handler");
-        hThread.start();
-        handler = new Handler(hThread.getLooper());
-
-        Button foto = (Button) findViewById(R.id.button_setphoto);
-        foto.setOnClickListener(this);
-
-        Button gps = (Button) findViewById(R.id.button_setgps);
-        gps.setOnClickListener(this);
-
-        Button naechster = (Button) findViewById(R.id.button_nextstop);
-        foto.setOnClickListener(this);
-
-        Button hinweis =(Button) findViewById(R.id.button_setText);
-        hinweis.setOnClickListener(this);
-
-        Button ende = (Button) findViewById(R.id.button_abschließen);
-        foto.setOnClickListener(this);
-
-
-
-        tv1 = (TextureView) findViewById(R.id.tv1);
-        tv1.setSurfaceTextureListener(tv1Listener);
-
     }
 
     public void onClick(View v) {
@@ -248,18 +248,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public boolean checkName (){
-
-        EditText edi1 = (EditText) findViewById(R.id.editText_Name);
-        name = edi1.getEditableText().toString();
-
-        if (name.equalsIgnoreCase("Name des Spiels eingeben"))
-        return false;
-        else{
-            return true;
-        }
-    }
-
     private void takePicture() {
         if (camera == null) {
             return;
@@ -301,7 +289,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             //
             //
 
-            final File file = new File(Environment.getExternalStorageDirectory() + "/meinBild.jpg");
+            final File file = new File(Environment.getExternalStorageDirectory() + "/"+ name + step +".jpg");
             ImageReader.OnImageAvailableListener onImageAvailableListener = new ImageReader.OnImageAvailableListener() {
                 Image image = null;
 
@@ -386,17 +374,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         };
     checkPem();
     }
-    void checkPem(){
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.INTERNET}
-                        ,10);
-            }
-            return;
-        }
-                locMan.requestLocationUpdates("gps", 5000, 0, locLis);
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode){
@@ -484,6 +462,41 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         }
     }
 
+
+    public boolean checkName (){
+
+        EditText edi1 = (EditText) findViewById(R.id.editText_Name);
+        name = edi1.getEditableText().toString();
+
+        if (name.equalsIgnoreCase("Name des Spiels eingeben"))
+            return false;
+        else{
+            return true;
+        }
+    }
+
+    public boolean checkHinweis(){
+        EditText edi2 = (EditText) findViewById(R.id.editText_Hinweis);
+        hinweis = edi2.getEditableText().toString();
+        if (hinweis.equals("Hinweis eingeben")){
+            return  false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public void checkPem(){
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.INTERNET}
+                        ,10);
+            }
+            return;
+        }
+        locMan.requestLocationUpdates("gps", 5000, 0, locLis);
+    }
 }
 
 
