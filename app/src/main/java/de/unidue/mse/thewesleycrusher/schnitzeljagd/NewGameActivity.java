@@ -83,6 +83,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
         }
     };
+    private  EditText name = (EditText) findViewById(R.id.editText_Name);
     String camID;
     Size imageSize;
     private CameraDevice camera;
@@ -196,21 +197,25 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.button_setphoto:
-                if(checkName())
-                takePicture();
-
+                if(checkName()) {
+                    takePicture();
+                    gamFi.setName(name.getEditableText().toString());
+                }
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_setgps:
                 if(checkName())
+                {
                     getLoc();
+                     gamFi.setName(name.getEditableText().toString());}
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_nextstop:
                 if(checkName())
                     // bla bla methode
+                    gamFi.setName(name.getEditableText().toString())
                     ;
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -218,6 +223,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_abschließen:
                 if(checkName())
                     // bla bla Methode
+                    gamFi.setName(name.getEditableText().toString())
                    ;
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -225,6 +231,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_setText:
                 if(checkName())
                     // bla bla Methode
+                    gamFi.setName(name.getEditableText().toString())
                    ;
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -236,7 +243,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
     public boolean checkName (){
         String chname ;
-        EditText name = (EditText) findViewById(R.id.editText_Name);
         chname = name.getEditableText().toString();
 
         if (chname.equalsIgnoreCase("Name des Spiels eingeben"))
