@@ -83,9 +83,10 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
         }
     };
-    private  EditText name = (EditText) findViewById(R.id.editText_Name);
+    String name;
     String camID;
     Size imageSize;
+    Integer step ;
     private CameraDevice camera;
     private CameraDevice.StateCallback stateCallBack = new CameraDevice.StateCallback() {
 
@@ -164,6 +165,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
+        step =1 ;
        // getActionBar().setDisplayHomeAsUpEnabled(true);
 
         hThread = new HandlerThread("Background Handler");
@@ -199,7 +201,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_setphoto:
                 if(checkName()) {
                     takePicture();
-                    gamFi.setName(name.getEditableText().toString());
+                    gamFi.setName(name);
                 }
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -208,22 +210,25 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 if(checkName())
                 {
                     getLoc();
-                     gamFi.setName(name.getEditableText().toString());}
+                    gamFi.setName(name);}
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_nextstop:
                 if(checkName())
                     // bla bla methode
-                    gamFi.setName(name.getEditableText().toString())
-                    ;
+                {
+                    gamFi.setName(name) ;
+                    step++;
+
+                }
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_abschließen:
                 if(checkName())
                     // bla bla Methode
-                    gamFi.setName(name.getEditableText().toString())
+                    gamFi.setName(name)
                    ;
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -231,7 +236,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_setText:
                 if(checkName())
                     // bla bla Methode
-                    gamFi.setName(name.getEditableText().toString())
+                    gamFi.setName(name)
                    ;
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -242,10 +247,11 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     }
 
     public boolean checkName (){
-        String chname ;
-        chname = name.getEditableText().toString();
 
-        if (chname.equalsIgnoreCase("Name des Spiels eingeben"))
+        EditText edi1 = (EditText) findViewById(R.id.editText_Name);
+        name = edi1.getEditableText().toString();
+
+        if (name.equalsIgnoreCase("Name des Spiels eingeben"))
         return false;
         else{
             return true;
@@ -356,7 +362,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         locLis = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-            // hier reinschreiben wo die location gespeichert werden soll :D
+            speicherGPS(step, location.getLatitude(), location.getLongitude());
             }
 
             @Override
@@ -418,6 +424,63 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         super.onBackPressed();
     }
 
+    public void speicherGPS (int i, double j, double k){
+    switch (i){
+        case 1:
+            if( j != 0 && k !=0 ){
+                gamFi.setLatitude1(j);
+                gamFi.setLongitude1(k);
+            }
+            break;
+        case 2:
+            if( j != 0 && k !=0 ){
+                gamFi.setLatitude2(j);
+                gamFi.setLongitude2(k);
+            }
+            break;
+        case 3:
+            if( j != 0 && k !=0 ){
+                gamFi.setLatitude3(j);
+                gamFi.setLongitude3(k);
+            }
+            break;
+        case 4:
+            if( j != 0 && k !=0 ){
+                gamFi.setLatitude4(j);
+                gamFi.setLongitude4(k);
+            }
+            break;
+
+        case 5:
+            if( j != 0 && k !=0 ){
+                gamFi.setLatitude5(j);
+                gamFi.setLongitude5(k);
+            }
+            break;
+
+    }
+    }
+    public void speicherHinweis(int i){
+        switch (i){
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+
+            case 5:
+
+                break;
+
+        }
+    }
 
 }
 
