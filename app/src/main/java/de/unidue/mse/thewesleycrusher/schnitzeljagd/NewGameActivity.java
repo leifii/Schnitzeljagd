@@ -55,6 +55,8 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     public final int REQUEST_ID = 200;
     private TextureView tv1;
 
+
+
     private TextureView.SurfaceTextureListener tv1Listener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -186,20 +188,45 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.button_setphoto:
+                if(checkName()== true)
                 takePicture();
+                else
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_setgps:
-                getLoc();
+                if(checkName()== true)
+                    getLoc();
+                else
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_nextstop:
+                if(checkName()== true)
+                    // bla bla methode
+                    ;
+                else
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_abschließen:
+                if(checkName()== true)
+                    // bla bla Methode
+                   ;
+                else
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_setText:
+                if(checkName()== true)
+                    // bla bla Methode
+                   ;
+                else
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(NewGameActivity.this, HinweisActivity.class));
                 break;
 
         }
+    }
+
+    public boolean checkName (){
+        return true;
     }
 
     private void takePicture() {
