@@ -34,7 +34,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
 
             case R.id.button_start:
-                startActivity(new Intent(StartActivity.this, AuswahlRouteActivity.class));
+                //startActivity(new Intent(this, AuswahlRouteActivity.class));
+                Intent intent = new Intent(StartActivity.this, AuswahlRouteActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.button_laden:
