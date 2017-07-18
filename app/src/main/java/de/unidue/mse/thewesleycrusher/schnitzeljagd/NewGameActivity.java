@@ -217,32 +217,43 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_nextstop:
-                if(checkName())
-                    // bla bla methode
-                {
-                    gamFi.setName(name) ;
-                    step++;
-
+                if(checkName()) {
+                    if (checkHinweis()) {
+                        gamFi.setName(name);
+                        step ++;
+                    } else {
+                        Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
-                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.button_abschließen:
-                if(checkName())
-                    // bla bla Methode
-                    gamFi.setName(name)
-                   ;
-                else
-                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
+                if(checkName()) {
+                    if (checkHinweis()) {
+                        gamFi.setName(name);
+                        gamFiWri.writeGameFile();
+                    } else {
+                        Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.button_setText:
-                if(checkName())
-                    // bla bla Methode
-                    gamFi.setName(name)
-                   ;
-                else
-                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(NewGameActivity.this, HinweisActivity.class));
+                if(checkName()) {
+                    if (checkHinweis()) {
+                        gamFi.setName(name);
+                        speicherHinweis(step, hinweis);
+                    } else {
+                        Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }
@@ -440,23 +451,22 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
     }
     }
-    public void speicherHinweis(int i){
+    public void speicherHinweis(int i, String h){
         switch (i){
             case 1:
-
+                gamFi.setHint1(h);
                 break;
             case 2:
-
+                gamFi.setHint2(h);
                 break;
             case 3:
-
+                gamFi.setHint3(h);
                 break;
             case 4:
-
+                gamFi.setHint4(h);
                 break;
-
             case 5:
-
+                gamFi.setHint5(h);
                 break;
 
         }
