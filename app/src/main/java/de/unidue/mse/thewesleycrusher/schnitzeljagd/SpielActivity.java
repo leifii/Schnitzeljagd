@@ -98,9 +98,9 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         gamefileloader=new Gamefileloader(myDirectoryPath, gamefile);
         gamefileloader.loadGamefile();
 
-        //textCurrentGame.setText("Current game: "+gamefile.getName());
-        textCurrentGame.setText(myDirectoryPath);
-        textDebug.setText(gamefile.getName());
+        textCurrentGame.setText("Current game: "+gamefile.getName());
+        //textCurrentGame.setText(myDirectoryPath);
+        //textDebug.setText(gamefile.getName());
 
         setTargetLocation();
         incrementCheckpoint();
