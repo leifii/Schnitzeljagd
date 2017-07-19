@@ -84,7 +84,7 @@ public class AuswahlRouteActivity extends AppCompatActivity {
 
                     textView.setText(file);
 
-                    Intent intent = new Intent(AuswahlRouteActivity.this, MapsActivity.class);
+                    Intent intent = new Intent(AuswahlRouteActivity.this, SpielActivity.class);   ///\\\\
                     intent.putExtra(EXTRA_MESSAGE,file);
                     startActivity(intent);
 

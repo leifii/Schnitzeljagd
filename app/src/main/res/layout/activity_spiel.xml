@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="de.unidue.mse.thewesleycrusher.schnitzeljagd.AnleitungActivity">
+
+    <TextView
+        android:id="@+id/textCurrentGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textCurrentLocationSpiel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/textCurrentGame"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@id/textCurrentGame"
+        android:layout_below="@+id/textCurrentGame"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/textTargetLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignEnd="@id/textCurrentLocationSpiel"
+        android:layout_alignRight="@id/textCurrentLocationSpiel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textCurrentLocationSpiel"
+        android:text=""  />
+
+
+    <TextView
+        android:id="@+id/textDebug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignEnd="@id/textTargetLocation"
+        android:layout_alignRight="@id/textTargetLocation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textTargetLocation"
+        android:text=""  />
+
+    <TextView
+        android:id="@+id/textCheckpointLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignEnd="@id/textDebug"
+        android:layout_alignRight="@id/textDebug"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textDebug"
+        android:text=""  />
+
+    <TextView
+        android:id="@+id/textDistanceToTargetLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignEnd="@id/textCheckpointLocation"
+        android:layout_alignRight="@id/textCheckpointLocation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textCheckpointLocation"
+        android:text=""  />
+
+
+
+    <Button
+        android:id="@+id/btnStopGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:text="Beenden" />
+    <Button
+        android:id="@+id/btnShowHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="false"
+        android:gravity="center"
+        android:text="Hinweis" />
+    <Button
+        android:id="@+id/btnShowPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:text="Bild"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -53,19 +53,16 @@
         <activity
             android:name=".MapsActivity"
             android:label="Karte"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".AnleitungActivity"
             android:label="Anleitung"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".HinweisActivity"
             android:label="Hinweis"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -79,8 +76,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
-
+        <activity android:name=".SpielActivity" />
+        <activity android:name=".ShowHintActivity" />
+        <activity android:name=".ShowImageActivity"></activity>
     </application>
 
 </manifest>
