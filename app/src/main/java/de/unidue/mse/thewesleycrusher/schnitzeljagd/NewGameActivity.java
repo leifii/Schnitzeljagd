@@ -663,22 +663,13 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         EditText edi1 = (EditText) findViewById(R.id.editText_Name);
         name = edi1.getEditableText().toString();
 
-        if (name.equalsIgnoreCase("Name des Spiels eingeben"))
-            return false;
-        else{
-            return true;
-        }
+        return !name.equalsIgnoreCase("Name des Spiels eingeben");
     }
 
     public boolean checkHinweis(){
         EditText edi2 = (EditText) findViewById(R.id.editText_Hinweis);
         hinweis = edi2.getEditableText().toString();
-        if (hinweis.equals("Hinweis eingeben")&&step<5 || hinweis.isEmpty()&&step<5){
-            return  false;
-        }
-        else{
-            return true;
-        }
+        return !(hinweis.equals("Hinweis eingeben") && step < 5 || hinweis.isEmpty() && step < 5);
     }
 
     public void checkPem(){
@@ -825,12 +816,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     private Boolean runsOnEmulator(){
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         String networkOperator = tm.getNetworkOperatorName();
-        if("Android".equals(networkOperator)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return "Android".equals(networkOperator);
 
     }
 }
