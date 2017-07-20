@@ -138,7 +138,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-                            //.setSmallIcon(R.drawable.notification)
+                          //  .setSmallIcon(R.drawable.ic_stat_name)
                             .setContentTitle("Notification")
                             .setContentText("Ziel erreicht!");
 

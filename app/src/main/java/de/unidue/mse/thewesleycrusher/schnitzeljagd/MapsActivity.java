@@ -190,7 +190,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 } else {
 
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Berechtigung abgelehnt", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -205,7 +205,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (v.getId()) {
 
             case R.id.button_hinweis:
-                startActivity(new Intent(MapsActivity.this, HinweisActivity.class));
+                startActivity(new Intent(MapsActivity.this, ShowHintActivity.class));
                 break;
         }
     }
