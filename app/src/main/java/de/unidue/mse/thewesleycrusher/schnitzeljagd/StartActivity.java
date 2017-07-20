@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,12 +34,28 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 10);
+        }
+
+
+
+
+
         //Check wether Directory to save data to exists, if it does not exist, it will be created
+
+
         String myDirectoryPath = Environment.getExternalStorageDirectory().getAbsolutePath();
         File directory = new File(myDirectoryPath, "Schnitzeljagd");
         if(!directory.exists()){
             directory.mkdir();
         }
+
     }
 
 

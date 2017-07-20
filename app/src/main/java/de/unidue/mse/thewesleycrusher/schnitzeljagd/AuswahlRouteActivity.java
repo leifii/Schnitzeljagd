@@ -25,7 +25,7 @@ public class AuswahlRouteActivity extends AppCompatActivity {
     String directoryFound = "directory found", listNotNull = "list not null", everything;
     BufferedReader reader;
 
-    public static final String EXTRA_MESSAGE = "com.example.tris.prototyp_schnitzeljagd.MESSAGE";
+    public static final String EXTRA_MESSAGE = "de.unidue.mse.thewesleycrusher.schnitzeljagd.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

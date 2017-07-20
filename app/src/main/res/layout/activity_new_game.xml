@@ -44,6 +44,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1.30" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -73,15 +74,12 @@
                 android:layout_marginTop="20dp"
                 android:text="Foto aufnehmen" />
 
-            <Button
-                android:id="@+id/button_setText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:text="Hinweise" />
+            <TextView
+                android:id="@+id/textViewCurrentCheckpoint"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+
+                />
 
         </LinearLayout>
 

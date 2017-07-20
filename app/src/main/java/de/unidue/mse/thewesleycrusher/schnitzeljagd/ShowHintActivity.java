@@ -20,7 +20,11 @@ public class ShowHintActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String hint = intent.getStringExtra(SpielActivity.EXTRA_MESSAGE);
 
+        Intent intent2=getIntent();
+        String data = intent2.getStringExtra(NewGameActivity.EXTRA_MESSAGE);
+
         textView.setText(hint);
+        textView.setText(data);
 
     }
 

@@ -105,7 +105,7 @@ public class Gamefilewriter {
                     dir.mkdir();
                 }
                 //initializing file to store information to
-                writeFile = new File(dir, gftw.getName()+".txt");
+                writeFile = new File(dir, gftw.getName());
                 try {
                     writeFile.createNewFile();
 

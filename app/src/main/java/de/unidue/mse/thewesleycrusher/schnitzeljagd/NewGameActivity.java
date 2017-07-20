@@ -3,6 +3,7 @@ package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
@@ -29,6 +30,9 @@ import android.os.HandlerThread;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.telephony.TelephonyManager;
 import android.util.Size;
 import android.view.MenuItem;
 import android.view.Surface;
@@ -36,6 +40,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -43,6 +48,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,8 +63,22 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     private Gamefile gamFi;
     private Gamefilewriter gamFiWri;
 
+    private Location myLastLocation;
+
     public final int REQUEST_ID = 200;
     private TextureView tv1;
+
+    private String toWrite;
+    private Boolean firstGpsSignal = true;
+    private TextView textCurrentCheckpoint;
+
+    private Button ende, naechster;
+
+    public static final String EXTRA_MESSAGE = "de.unidue.mse.thewesleycrusher.schnitzeljagd.MESSAGE";
+
+
+
+
 
 
 
@@ -120,6 +140,67 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_new_game);
 
 
+        /*
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(NewGameActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_ID);
+        }
+        */
+
+
+
+
+        locMan = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+
+        if(!locMan.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            noGpsAlert();
+        }
+
+        locLis=new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                myLastLocation.set(location);
+
+                if(firstGpsSignal){
+                    Toast toast = Toast.makeText(NewGameActivity.this, "GPS enabled", Toast.LENGTH_SHORT);
+                    toast.show();
+                    firstGpsSignal=false;
+                }
+
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, locLis);
+        }
+
+
+
+
+
+
 
         gamFi = new Gamefile();
         gamFiWri = new Gamefilewriter(gamFi);
@@ -136,17 +217,35 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         Button gps = (Button) findViewById(R.id.button_setgps);
         gps.setOnClickListener(this);
 
-        Button naechster = (Button) findViewById(R.id.button_nextstop);
-        foto.setOnClickListener(this);
+        naechster = (Button) findViewById(R.id.button_nextstop);
+        naechster.setOnClickListener(this);
 
+
+        /*
         Button hinweis =(Button) findViewById(R.id.button_setText);
         hinweis.setOnClickListener(this);
+        */
 
-        Button ende = (Button) findViewById(R.id.button_abschließen);
-        foto.setOnClickListener(this);
+        ende = (Button) findViewById(R.id.button_abschließen);
+        ende.setOnClickListener(this);
 
         tv1 = (TextureView) findViewById(R.id.tv1);
         tv1.setSurfaceTextureListener(tv1Listener);
+        textCurrentCheckpoint = (TextView) findViewById(R.id.textViewCurrentCheckpoint);
+        textCurrentCheckpoint.setText(String.valueOf(step));
+
+        myLastLocation = new Location("schnitzeljagd");
+        myLastLocation.set(locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER));
+
+        //checkPem();
+
+
+
+
+
+
+
+
 
 
 
@@ -192,11 +291,16 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             CameraCharacteristics camChar = camMan.getCameraCharacteristics(camID);
             StreamConfigurationMap streamConfigMap = camChar.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
             imageSize = streamConfigMap.getOutputSizes(SurfaceTexture.class)[0];
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
-                    ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                camMan.openCamera(camID, stateCallBack, null);
+
+                /*
                 ActivityCompat.requestPermissions(NewGameActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_ID);
+                */
             }
-            camMan.openCamera(camID, stateCallBack, null);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -207,8 +311,14 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
             case R.id.button_setphoto:
                 if(checkName()) {
+                    if(step==1){
+                        EditText edi = (EditText) findViewById(R.id.editText_Name);
+                        name = edi.getEditableText().toString();
+                        gamFi.setName(name);
+                    }
+
                     takePicture();
-                    gamFi.setName(name);
+                    //gamFi.setName(name);
                 }
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
@@ -216,16 +326,48 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_setgps:
                 if(checkName())
                 {
-                    getLoc();
-                    gamFi.setName(name);}
+
+                    //getLoc();
+                    //gamFi.setName(name);
+                    speicherGPS(step);
+                    String locations = "Longitude: "+String.valueOf(myLastLocation.getLongitude()) +"\nLatitude: " + String.valueOf(myLastLocation.getLatitude());
+                    Toast toast = Toast.makeText(this, locations, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 else
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_nextstop:
                 if(checkName()) {
                     if (checkHinweis()) {
-                        gamFi.setName(name);
-                        step ++;
+                        if(step==1) {
+                            EditText edi1 = (EditText) findViewById(R.id.editText_Name);
+                            name = edi1.getEditableText().toString();
+                            gamFi.setName(name);
+                            Toast toast = Toast.makeText(this, name, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        EditText edi2 = (EditText) findViewById(R.id.editText_Hinweis);
+                        hinweis = edi2.getEditableText().toString();
+                        speicherHinweis(step, hinweis);
+                        speicherGPS(step);
+
+                        if(step<=5) {
+                            if(step<6) {
+                                step++;
+                            }
+                            if(step==5){
+                                naechster.setEnabled(false);
+                                naechster.setClickable(false);
+                            }
+                            textCurrentCheckpoint.setText(String.valueOf("Checkpoint: "+"\n" +step));
+                            edi2.setText("");
+                        }
+                        else{
+                            Toast toast = Toast.makeText(this, "Es wurden bereits 5 Checkpoints erstellt", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
                     } else {
                         Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
                     }
@@ -237,21 +379,24 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             case R.id.button_abschließen:
                 if(checkName()) {
                     if (checkHinweis()) {
-                        gamFi.setName(name);
-                        gamFiWri.writeGameFile();
-                    } else {
-                        Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.button_setText:
-                if(checkName()) {
-                    if (checkHinweis()) {
-                        gamFi.setName(name);
+                        //gamFi.setName(name);
+                        if(step==1){
+                            EditText edi1 = (EditText) findViewById(R.id.editText_Name);
+                            name = edi1.getEditableText().toString();
+                            gamFi.setName(name);
+                        }
+                        //gamFiWri.writeGameFile();
+                        EditText edi2 = (EditText) findViewById(R.id.editText_Hinweis);
+                        hinweis = edi2.getEditableText().toString();
                         speicherHinweis(step, hinweis);
+                        speicherGPS(step);
+
+                        if(runsOnEmulator()) {
+                            showStringToWrite();
+                        }
+                        else{
+                            gamFiWri.writeGameFile();
+                        }
                     } else {
                         Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
                     }
@@ -261,6 +406,28 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 }
                 break;
 
+
+            /*
+            case R.id.button_setText:
+                Toast toast = Toast.makeText(this, "testestest", Toast.LENGTH_SHORT);
+                toast.show();
+
+
+                if(checkName()) {
+                    if (checkHinweis()) {
+                        //gamFi.setName(name);
+                        speicherHinweis(step, hinweis);
+                    } else {
+                        Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen", Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+                */
         }
     }
 
@@ -305,7 +472,13 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             //
             //
 
-            final File file = new File(Environment.getExternalStorageDirectory() + "/"+ name + step +".jpg");
+
+            File directory = new File(Environment.getExternalStorageDirectory() + "/schnitzeljagd", name);
+            if(!directory.exists()){
+                directory.mkdir();
+            }
+
+            final File file = new File(directory, name + step +".jpg");
             ImageReader.OnImageAvailableListener onImageAvailableListener = new ImageReader.OnImageAvailableListener() {
                 Image image = null;
 
@@ -362,10 +535,11 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         }
     }
 
+
+    /*
     //Position herausfinden
     private void getLoc() {
-        locMan = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locLis = new LocationListener() {
+         {
             @Override
             public void onLocationChanged(Location location) {
             speicherGPS(step, location.getLatitude(), location.getLongitude());
@@ -388,8 +562,11 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             }
 
         };
-    checkPem();
+
     }
+        */
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -420,7 +597,10 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         super.onBackPressed();
     }
 
-    public void speicherGPS (int i, double j, double k){
+    public void speicherGPS (int i){
+
+        Double j = myLastLocation.getLatitude();
+        Double k = myLastLocation.getLongitude();
     switch (i){
         case 1:
             if( j != 0 && k !=0 ){
@@ -493,7 +673,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     public boolean checkHinweis(){
         EditText edi2 = (EditText) findViewById(R.id.editText_Hinweis);
         hinweis = edi2.getEditableText().toString();
-        if (hinweis.equals("Hinweis eingeben")){
+        if (hinweis.equals("Hinweis eingeben")&&step<5 || hinweis.isEmpty()&&step<5){
             return  false;
         }
         else{
@@ -510,7 +690,148 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
             }
             return;
         }
-        locMan.requestLocationUpdates("gps", 5000, 0, locLis);
+        //locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locLis);
+    }
+
+
+
+    /*
+    @Override
+    public void onLocationChanged(Location location) {
+        //speicherGPS(step, location.getLatitude(), location.getLongitude());
+        myLastLocation.set(location);
+
+        if(firstGpsSignal){
+            Toast toast = Toast.makeText(this, "GPS enabled", Toast.LENGTH_SHORT);
+            toast.show();
+            firstGpsSignal=false;
+        }
+    }
+
+
+
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+        Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(i);
+
+    }
+    */
+
+    public void showStringToWrite(){
+
+
+       new Thread(new Runnable(){
+            public void run(){
+
+
+                ///Checks for the information to write to the File and saves it in a String
+
+                if(gamFi.getName()!=null){
+                    toWrite="<name>\r\n" +gamFi.getName()+"\r\n</name>";
+                }
+                if(gamFi.getLongitude1()!=0){
+                    toWrite+="\r\n<Longitude1>\r\n"+String.valueOf(gamFi.getLongitude1())+"\r\n</Longitude1>";
+                }
+                if(gamFi.getLongitude2()!=0){
+                    toWrite+="\r\n<Longitude2>\r\n"+String.valueOf(gamFi.getLongitude2())+"\r\n</Longitude2>";
+                }
+                if(gamFi.getLongitude3()!=0){
+                    toWrite+="\r\n<Longitude3>\r\n"+String.valueOf(gamFi.getLongitude3())+"\r\n</Longitude3>";
+                }
+                if(gamFi.getLongitude4()!=0){
+                    toWrite+="\r\n<Longitude4>\r\n"+String.valueOf(gamFi.getLongitude4())+"\r\n</Longitude4>";
+                }
+                if(gamFi.getLongitude5()!=0){
+                    toWrite+="\r\n<Longitude5>\r\n"+String.valueOf(gamFi.getLongitude5())+"\r\n</Longitude5>";
+                }
+                if(gamFi.getLatitude1()!=0){
+                    toWrite+="\r\n<Latitude1>\r\n"+String.valueOf(gamFi.getLatitude1())+"\r\n</Latitude1>";
+                }
+                if(gamFi.getLatitude2()!=0){
+                    toWrite+="\r\n<Latitude2>\r\n"+String.valueOf(gamFi.getLatitude2())+"\r\n</Latitude2>";
+                }
+                if(gamFi.getLatitude3()!=0){
+                    toWrite+="\r\n<Latitude3>\r\n"+String.valueOf(gamFi.getLatitude3())+"\r\n</Latitude3>";
+                }
+                if(gamFi.getLatitude4()!=0){
+                    toWrite+="\r\n<Latitude4>\r\n"+String.valueOf(gamFi.getLatitude4())+"\r\n</Latitude4>";
+                }
+                if(gamFi.getLatitude5()!=0){
+                    toWrite+="\r\n<Latitude5>\r\n"+String.valueOf(gamFi.getLatitude5())+"\r\n</Latitude5>";
+                }
+                if(gamFi.getHint1()!=null){
+                    toWrite+="\r\n<Hint1>\r\n"+gamFi.getHint1()+"\r\n</Hint1>";
+                }
+                if(gamFi.getHint2()!=null){
+                    toWrite+="\r\n<Hint2>\r\n"+gamFi.getHint2()+"\r\n</Hint2>";
+                }
+                if(gamFi.getHint3()!=null){
+                    toWrite+="\r\n<Hint3>\r\n"+gamFi.getHint3()+"\r\n</Hint3>";
+                }
+                if(gamFi.getHint4()!=null){
+                    toWrite+="\r\n<Hint4>\r\n"+gamFi.getHint4()+"\r\n</Hint4>";
+                }
+                if(gamFi.getHint5()!=null){
+                    toWrite+="\r\n<Hint5>\r\n"+gamFi.getHint5()+"\r\n</Hint5>";
+                }
+
+                Intent intent = new Intent(NewGameActivity.this, ShowHintActivity.class);
+                String arsch = String.valueOf(myLastLocation.getLatitude());
+                intent.putExtra(EXTRA_MESSAGE, toWrite);
+                //intent.putExtra(EXTRA_MESSAGE, arsch);
+                startActivity(intent);
+
+            }
+        }).start();
+
+
+    }
+
+
+    private void noGpsAlert() {final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled. Do you want to enable it?").setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
+
+    private Boolean runsOnEmulator(){
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String networkOperator = tm.getNetworkOperatorName();
+        if("Android".equals(networkOperator)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }
 
