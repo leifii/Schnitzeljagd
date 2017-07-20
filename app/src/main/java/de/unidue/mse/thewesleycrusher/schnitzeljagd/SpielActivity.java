@@ -138,7 +138,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-                            //.setSmallIcon(R.drawable.notification)
+                            .setSmallIcon(R.drawable.notification)
                             .setContentTitle("Notification")
                             .setContentText("Ziel erreicht!");
 
@@ -151,7 +151,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
             Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
             v.vibrate(1000);
 
-            stopGame();
+           // stopGame();
 
 
         }
@@ -257,7 +257,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        //.setSmallIcon(R.drawable.notification)
+                        .setSmallIcon(R.drawable.notification)
                         .setContentTitle("Notification")
                         .setContentText("Checkpoint "+j+" erreicht!");
 
