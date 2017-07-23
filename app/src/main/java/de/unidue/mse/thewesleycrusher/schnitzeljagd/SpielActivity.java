@@ -506,11 +506,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                 break;
 
             case R.id.btnDeleteSavegame:
-                gamefilewriter.clearSaveFile(gamefile);
-                currentCheckpoint=1;
-                reachedCheckpoints=0;
-                gamefile=new Gamefile();
-                Toast.makeText(this, "Fortschritt gelöscht!", Toast.LENGTH_SHORT).show();
+                resetSaveFile();
                 break;
 
         }
@@ -530,6 +526,33 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                         Intent intent = new Intent(SpielActivity.this, StartActivity.class);
                         startActivity(intent);
                         finish();
+                    }
+                })
+                .setNegativeButton("NEIN!", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+    public void resetSaveFile(){
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Möchtest du deinen bisherigen Fortschritt auf dieser Route zurücksetzen?").setCancelable(false)
+                .setPositiveButton("JA!", new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        gamefilewriter.clearSaveFile(gamefile);
+                        currentCheckpoint=1;
+                        reachedCheckpoints=0;
+                        gamefile=new Gamefile();
+                        Toast.makeText(SpielActivity.this, "Fortschritt gelöscht!", Toast.LENGTH_SHORT).show();
+
+
                     }
                 })
                 .setNegativeButton("NEIN!", new DialogInterface.OnClickListener(){

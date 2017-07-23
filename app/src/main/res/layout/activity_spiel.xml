@@ -129,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/btnMap"
-        android:text="dlt svfl" />
+        android:text="reset" />
 
     <ImageView
         android:id="@+id/imageViewSpielActivity"
