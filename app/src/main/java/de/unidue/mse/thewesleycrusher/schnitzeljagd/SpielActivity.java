@@ -84,8 +84,9 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
             Gamefileloader gamefileloader = new Gamefileloader();
             loadedCheckpoint = gamefileloader.loadSaveFile(routsDirectoryPath+"/"+message+"/"+message+"Save.txt");
             if(loadedCheckpoint>0&&loadedCheckpoint<6){
-                counterCheckpoints=loadedCheckpoint;
-                currentCheckpoint=loadedCheckpoint;
+
+               reachedCheckpoints=loadedCheckpoint;
+               currentCheckpoint=reachedCheckpoints+1;
                 Toast.makeText(this, "Gestartet via intent, letzter Checkpoint geladen", Toast.LENGTH_SHORT).show();
             }
 
@@ -301,16 +302,16 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
     }
     public void incrementCheckpoint(){
 
-        if(counterCheckpoints ==1&&gamefile.getLongitude1()!=0&&gamefile.getLatitude1()!=0){
-            checkPointLocation.setLongitude(gamefile.getLongitude1());
-            checkPointLocation.setLatitude(gamefile.getLatitude1());
-            textCheckpointLocation.setText("Checkpoint 1: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+        if(counterCheckpoints ==5&&gamefile.getLongitude5()!=0&&gamefile.getLatitude5()!=0){
+            checkPointLocation.setLongitude(gamefile.getLongitude5());
+            checkPointLocation.setLatitude(gamefile.getLatitude5());
+            textCheckpointLocation.setText("Checkpoint 5: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
 
         }
-        if(counterCheckpoints ==2&&gamefile.getLongitude2()!=0&&gamefile.getLatitude2()!=0){
-            checkPointLocation.setLongitude(gamefile.getLongitude2());
-            checkPointLocation.setLatitude(gamefile.getLatitude2());
-            textCheckpointLocation.setText("Checkpoint 2: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+        if(counterCheckpoints ==4&&gamefile.getLongitude4()!=0&&gamefile.getLatitude4()!=0){
+            checkPointLocation.setLongitude(gamefile.getLongitude4());
+            checkPointLocation.setLatitude(gamefile.getLatitude4());
+            textCheckpointLocation.setText("Checkpoint 4: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
 
         }
         if(counterCheckpoints ==3&&gamefile.getLongitude3()!=0&&gamefile.getLatitude3()!=0){
@@ -319,17 +320,22 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
             textCheckpointLocation.setText("Checkpoint 3: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
 
         }
-        if(counterCheckpoints ==4&&gamefile.getLongitude4()!=0&&gamefile.getLatitude4()!=0){
-            checkPointLocation.setLongitude(gamefile.getLongitude4());
-            checkPointLocation.setLatitude(gamefile.getLatitude4());
-            textCheckpointLocation.setText("Checkpoint 4: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
-
-        }if(counterCheckpoints ==5&&gamefile.getLongitude5()!=0&&gamefile.getLatitude5()!=0){
-            checkPointLocation.setLongitude(gamefile.getLongitude5());
-            checkPointLocation.setLatitude(gamefile.getLatitude5());
-            textCheckpointLocation.setText("Checkpoint 5: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+        if(counterCheckpoints ==2&&gamefile.getLongitude2()!=0&&gamefile.getLatitude2()!=0){
+            checkPointLocation.setLongitude(gamefile.getLongitude2());
+            checkPointLocation.setLatitude(gamefile.getLatitude2());
+            textCheckpointLocation.setText("Checkpoint 2: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
 
         }
+
+        if(counterCheckpoints ==1&&gamefile.getLongitude1()!=0&&gamefile.getLatitude1()!=0){
+            checkPointLocation.setLongitude(gamefile.getLongitude1());
+            checkPointLocation.setLatitude(gamefile.getLatitude1());
+            textCheckpointLocation.setText("Checkpoint 1: " + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+
+        }
+
+
+
         counterCheckpoints++;
 
 
