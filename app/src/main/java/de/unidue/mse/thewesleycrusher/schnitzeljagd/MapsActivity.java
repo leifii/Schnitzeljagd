@@ -35,7 +35,7 @@ import com.google.android.gms.location.LocationListener;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener,View.OnClickListener {
+        LocationListener{
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
@@ -51,9 +51,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        Button start = (Button) findViewById(R.id.button_hinweis);
-        start.setOnClickListener(this);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -200,15 +197,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.button_hinweis:
-                startActivity(new Intent(MapsActivity.this, ShowHintActivity.class));
-                break;
-        }
-    }
 
 
     @Override

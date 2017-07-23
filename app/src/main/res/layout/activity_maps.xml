@@ -10,18 +10,7 @@
     tools:context="de.unidue.mse.thewesleycrusher.schnitzeljagd.MapsActivity">
 
 
-    <Button
-    android:id="@+id/button_hinweis"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="right|bottom"
-    android:text="Hinweis"
-    android:padding="10dp"
-    android:layout_marginTop="20dp"
-    android:paddingRight="10dp"
-    android:background="@color/colorPrimary"
-    android:textStyle="bold"
-    android:textSize="@dimen/activity_horizontal_margin"/>
+
 
 
     </fragment>
