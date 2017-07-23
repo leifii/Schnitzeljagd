@@ -472,7 +472,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         super.onPause();
 
 
-        if(reachedCheckpoints>0&&reachedCheckpoints<5) {
+        if(reachedCheckpoints>0&&reachedCheckpoints<5&&gameIsRunning) {
             gamefilewriter.saveReachedCheckpoints(gamefile, reachedCheckpoints);
             Toast.makeText(this, "onPause, saved " +reachedCheckpoints, Toast.LENGTH_SHORT).show();
         }
