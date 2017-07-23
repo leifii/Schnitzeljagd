@@ -24,11 +24,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-       Button start = (Button) findViewById(R.id.button_start);
+        Button start = (Button) findViewById(R.id.button_start);
         start.setOnClickListener(this);
-       Button laden = (Button) findViewById(R.id.button_laden);
+        Button laden = (Button) findViewById(R.id.button_laden);
         laden.setOnClickListener(this);
-       Button anleitung = (Button) findViewById(R.id.button_anleitung);
+        Button anleitung = (Button) findViewById(R.id.button_anleitung);
         anleitung.setOnClickListener(this);
         Button neuesspiel = (Button) findViewById(R.id.button_neuesspiel );
         neuesspiel.setOnClickListener(this);
@@ -54,6 +54,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
 
         File mainDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Schnitzeljagd");
+        //File mainDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.)
 
         if(!mainDirectory.exists()){
             mainDirectory.mkdir();

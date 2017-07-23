@@ -1,7 +1,9 @@
 package de.unidue.mse.thewesleycrusher.schnitzeljagd;
 
 import android.Manifest;
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
     private String message;
     private Boolean gameIsRunning, firstTime=true, targetReached=false;
     private TextView textCurrentGame, currentLocation, textTargetLocation, distanceText, textDebug, textCheckpointLocation;
+    private ImageView imageViewSpiel;
     private Button button;
     private Thread tommy;
 
@@ -71,7 +75,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
             reachedCheckpoints = savedInstanceState.getInt(STATE_CHECKPOINT);
 
             message = savedInstanceState.getString(STATE_ROUTENAME);
-            Toast.makeText(this, "Geladen via savedInstanceState", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Geladen via savedInstanceState", Toast.LENGTH_SHORT).show();
             gamefile=new Gamefile();
 
 
@@ -80,7 +84,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         }else{
 
             message=mainIntent.getStringExtra(AuswahlRouteActivity.EXTRA_MESSAGE);
-            Toast.makeText(this, "Gestartet via intent", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Gestartet via intent", Toast.LENGTH_SHORT).show();
             Gamefileloader gamefileloader = new Gamefileloader();
             loadedCheckpoint = gamefileloader.loadSaveFile(routsDirectoryPath+"/"+message+"/"+message+"Save.txt");
             gamefile=new Gamefile();
@@ -90,7 +94,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
                reachedCheckpoints=loadedCheckpoint;
 
-                Toast.makeText(this, "Gestartet via intent,Checkpoint "+reachedCheckpoints+" geladen", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Gestartet via intent,Checkpoint "+reachedCheckpoints+" geladen", Toast.LENGTH_SHORT).show();
             }
             else{
                 reachedCheckpoints=0;
@@ -107,6 +111,9 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         distanceText  = (TextView) findViewById(R.id.textDistanceToTargetLocation);
         textDebug = (TextView) findViewById(R.id.textDebug);
         textCheckpointLocation = (TextView) findViewById(R.id.textCheckpointLocation);
+        imageViewSpiel = (ImageView)  findViewById(R.id.imageViewSpielActivity);
+
+
         findViewById(R.id.btnStopGame).setOnClickListener(this);
         findViewById(R.id.btnShowHint).setOnClickListener(this);
         findViewById(R.id.btnShowPicture).setOnClickListener(this);
@@ -125,7 +132,10 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         mLastLocation=new Location("schnitzeljagd");
-        mLastLocation.set(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
+
+        if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null) {
+            mLastLocation.set(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
+        }
         targetLocation=new Location("Schnitzeljagd");
         checkPointLocation=new Location("Schnitzeljagd");
 
@@ -139,22 +149,22 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         setTargetLocation();
         incrementCheckpoint();
 
-        textCurrentGame.setText("Current game: "+gamefile.getName());
-        currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
-                "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
+        textCurrentGame.setText("Derzeitige Route: "+"\n"+gamefile.getName());
+        //currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
+        //        "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
 
 
 
 
-        textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+        //textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
 
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
 
                 mLastLocation.set(location);
-                currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
-                        "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
+               // currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
+                //        "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
 
 
 
@@ -176,11 +186,14 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                             gameIsRunning = false;
                             targetReached = true;
                             checkPointReached();
+
+
                             NotificationCompat.Builder mBuilder =
                                     new NotificationCompat.Builder(SpielActivity.this)
-                                            .setSmallIcon(R.drawable.notification)
+                                            .setSmallIcon(R.drawable.notification3)
                                             .setContentTitle("Notification")
                                             .setContentText("Ziel erreicht!");
+
 
                             int mNotificationId = 001;
                             // Gets an instance of the NotificationManager service
@@ -195,8 +208,8 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                     }
                 }
 
-                distanceText.setText("Distanz ungefähr: "+String.valueOf(getDistance())+" Meter");
-                textTargetLocation.setText("Targetlocation: " + "\nLongitude: "+String.valueOf(targetLocation.getLongitude())+"\nLatitude: " +String.valueOf(targetLocation.getLatitude()));
+                //distanceText.setText("Distanz ungefähr: "+String.valueOf(getDistance())+" Meter");
+                //textTargetLocation.setText("Targetlocation: " + "\nLongitude: "+String.valueOf(targetLocation.getLongitude())+"\nLatitude: " +String.valueOf(targetLocation.getLatitude()));
             }
 
             @Override
@@ -227,7 +240,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         gameIsRunning=true;
        // tommy = new Thread(new ForceLocationUpdates(locationManager, mLastLocation, targetLocation, checkPointLocation, new Handler(this), SpielActivity.this, checkpointsToReach, reachedCheckpoints));
        // tommy.start();
-        textTargetLocation.setText("Targetlocation: " + "\nLongitude: "+String.valueOf(targetLocation.getLongitude())+"\nLatitude: " +String.valueOf(targetLocation.getLatitude()));
+        //textTargetLocation.setText("Targetlocation: " + "\nLongitude: "+String.valueOf(targetLocation.getLongitude())+"\nLatitude: " +String.valueOf(targetLocation.getLatitude()));
 
 
 
@@ -237,16 +250,16 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
     public boolean handleMessage(Message message) {
         if(message.arg1==1){
 
-            currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
-                    "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
+           // currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
+            //        "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
 
-            distanceText.setText("Distanz ungefähr: "+String.valueOf(getDistance())+" Meter");
+           // distanceText.setText("Distanz ungefähr: "+String.valueOf(getDistance())+" Meter");
         }
 
 
         if(message.arg1==2){
 
-            distanceText.setText("Distanz ungefähr: "+String.valueOf(getDistance())+" Meter");
+          //  distanceText.setText("Distanz ungefähr: "+String.valueOf(getDistance())+" Meter");
 
             if (firstTime) {
                     checkPointReached();
@@ -267,8 +280,8 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                     gameIsRunning = false;
                     NotificationCompat.Builder mBuilder =
                             new NotificationCompat.Builder(this)
-                                    .setSmallIcon(R.drawable.notification)
-                                    .setContentTitle("Notification")
+                                    .setSmallIcon(R.drawable.notification3)
+                                    .setContentTitle("Schnitzeljagd")
                                     .setContentText("Ziel erreicht!");
 
                     int mNotificationId = 001;
@@ -280,21 +293,21 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                     Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
                     v.vibrate(1000);
 
-                    //stopGame();
+                    locationManager.removeUpdates(locationListener);
 
                 }
             }
         }
-        if(message.arg1==4){
-            currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
-                    "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
-            if(checkPointLocation.distanceTo(mLastLocation)<25){
+      //  if(message.arg1==4){
+           // currentLocation.setText("Current Location"+"\nLongitude: " + String.valueOf(mLastLocation.getLongitude() +
+           //         "\nLatitude: "+String.valueOf(mLastLocation.getLatitude())));
+           // if(checkPointLocation.distanceTo(mLastLocation)<25){
                // checkPointReached();
                // incrementCheckpoint();
-            }
+           // }
             //Toast.makeText(this, "ich renne", Toast.LENGTH_SHORT).show();
 
-        }
+       // }
         return false;
     }
 
@@ -324,37 +337,34 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
         if(gamefile.getLongitude1()!=0&&gamefile.getLatitude1()!=0) {
             this.targetLocation.setLongitude(gamefile.getLongitude1());
             this.targetLocation.setLatitude(gamefile.getLatitude1());
-            textDebug.setText("Hinterlegte Checkpoints = 1");
             checkpointsToReach =1;
         }
         if(gamefile.getLongitude2()!=0&&gamefile.getLatitude2()!=0) {
             this.targetLocation.setLongitude(gamefile.getLongitude2());
             this.targetLocation.setLatitude(gamefile.getLatitude2());
-            textDebug.setText("Hinterlegte Checkpoints = 2");
             checkpointsToReach =2;
 
         }
         if(gamefile.getLongitude3()!=0&&gamefile.getLatitude3()!=0) {
             this.targetLocation.setLongitude(gamefile.getLongitude3());
             this.targetLocation.setLatitude(gamefile.getLatitude3());
-            textDebug.setText("Hinterlegte Checkpoints = 3");
             checkpointsToReach =3;
 
         }
         if(gamefile.getLongitude4()!=0&&gamefile.getLatitude4()!=0) {
             this.targetLocation.setLongitude(gamefile.getLongitude4());
             this.targetLocation.setLatitude(gamefile.getLatitude4());
-            textDebug.setText("Hinterlegte Checkpoints = 4");
             checkpointsToReach =4;
 
         }
         if(gamefile.getLongitude5()!=0&&gamefile.getLatitude5()!=0) {
             this.targetLocation.setLongitude(gamefile.getLongitude5());
             this.targetLocation.setLatitude(gamefile.getLatitude5());
-            textDebug.setText("Hinterlegte Checkpoints = 5");
             checkpointsToReach =5;
 
         }
+        textDebug.setText("Zu erreichende Checkpoints: "+checkpointsToReach);
+
 
     }
     public void incrementCheckpoint(){
@@ -364,50 +374,40 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
             checkPointLocation.setLongitude(gamefile.getLongitude1());
             checkPointLocation.setLatitude(gamefile.getLatitude1());
             textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
-            Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
+           // textCheckpointLocation.setText("Du suchst derzeit: "+currentCheckpoint );
 
 
         }
         if(currentCheckpoint ==2&&gamefile.getLongitude2()!=0&&gamefile.getLatitude2()!=0){
             checkPointLocation.setLongitude(gamefile.getLongitude2());
             checkPointLocation.setLatitude(gamefile.getLatitude2());
-            textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
-            Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
-
+            //textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+            //Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
 
         }
         if(currentCheckpoint ==3&&gamefile.getLongitude3()!=0&&gamefile.getLatitude3()!=0){
             checkPointLocation.setLongitude(gamefile.getLongitude3());
             checkPointLocation.setLatitude(gamefile.getLatitude3());
-            textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
-            Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
-
+            //textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+            //Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
 
         }
         if(currentCheckpoint==4&&gamefile.getLongitude4()!=0&&gamefile.getLatitude4()!=0){
             checkPointLocation.setLongitude(gamefile.getLongitude4());
             checkPointLocation.setLatitude(gamefile.getLatitude4());
-            textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
-            Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
-
+           // textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+            //Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
 
         }
         if(currentCheckpoint ==5&&gamefile.getLongitude5()!=0&&gamefile.getLatitude5()!=0){
             checkPointLocation.setLongitude(gamefile.getLongitude5());
             checkPointLocation.setLatitude(gamefile.getLatitude5());
-            textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
-            Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
-
-
+            //textCheckpointLocation.setText("Checkpoint: "+currentCheckpoint + "\nLongitude: "+String.valueOf(checkPointLocation.getLongitude())+"\nLatitude: " +String.valueOf(checkPointLocation.getLatitude()));
+            //Toast.makeText(this, "ich wurde gerufen mit: " +currentCheckpoint, Toast.LENGTH_SHORT).show();
         }
+        textCheckpointLocation.setText("Du suchst derzeit Checkpoint: "+currentCheckpoint );
         firstTime=true;
-
-
-
-
-
-        // currentCheckpoint++;
-
 
     }
 
@@ -424,9 +424,10 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.notification)
-                        .setContentTitle("Notification")
-                        .setContentText("Checkpoint "+ reachedCheckpoints+"/"+currentCheckpoint+"/"+checkpointsToReach +" erreicht!");
+                        .setSmallIcon(R.drawable.notification3)
+                        .setContentTitle("Schnitzeljagd")
+                        .setContentText("Checkpoint "+ reachedCheckpoints+" erreicht!");
+
         int mNotificationId = 001;
         // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
@@ -435,6 +436,19 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(500);
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -472,12 +486,14 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                 break;
 
             case R.id.btnShowPicture:
+
                 Intent intent2 = new Intent(this, ShowImageActivity.class);
 
 
 
                 hint= routsDirectoryPath+"/"+gamefile.getName()+"/"+gamefile.getName()+currentCheckpoint+".jpg";
                 intent2.putExtra(EXTRA_MESSAGE, hint);
+
                 startActivity(intent2);
                 break;
 
@@ -507,16 +523,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-
-
-                        //tommy.interrupt();
                         locationManager.removeUpdates(locationListener);
-
-
-
-
-                        //gamefilewriter.clearSaveFile(gamefile);
-
 
                         Intent intent = new Intent(SpielActivity.this, StartActivity.class);
                         startActivity(intent);
@@ -540,7 +547,7 @@ public class SpielActivity extends AppCompatActivity implements Handler.Callback
 
         if(reachedCheckpoints>0&&reachedCheckpoints<checkpointsToReach&&!targetReached) {
             gamefilewriter.saveReachedCheckpoints(gamefile, reachedCheckpoints);
-            Toast.makeText(this, "onPause, saved " +reachedCheckpoints, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "onPause, saved " +reachedCheckpoints, Toast.LENGTH_SHORT).show();
         }
 
 
