@@ -31,8 +31,9 @@ public class AuswahlRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auswahl_route);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
         textView = (TextView) findViewById(R.id.textSpielLaden);
 
         myDir= Environment.getExternalStorageDirectory().getAbsolutePath()+"/schnitzeljagd/routen";
@@ -105,7 +106,6 @@ public class AuswahlRouteActivity extends AppCompatActivity {
 
 
 
-        /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -123,8 +123,6 @@ public class AuswahlRouteActivity extends AppCompatActivity {
 
         super.onBackPressed();
     }
-
-    */
 
 
 }

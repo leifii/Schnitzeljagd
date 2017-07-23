@@ -39,40 +39,30 @@
             tools:layout_editor_absoluteY="386dp" />
 
         <Button
-            android:id="@+id/button_laden"
+            android:id="@+id/button_neuesspiel"
             android:layout_width="146dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/button_start"
             android:layout_below="@+id/button_start"
             android:layout_gravity="center"
             android:layout_marginTop="13dp"
-            android:text="Laden"
+            android:text="Neues Spiel"
             tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="231dp" />
+
+
 
         <Button
             android:id="@+id/button_anleitung"
             android:layout_width="146dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/button_neuesspiel"
-            android:layout_below="@+id/button_neuesspiel"
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
             android:text="Anleitung"
             tools:layout_editor_absoluteX="148dp"
-            tools:layout_editor_absoluteY="500dp" />
-
-        <Button
-            android:id="@+id/button_neuesspiel"
-            android:layout_width="146dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:text="Neues Spiel"
-            tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="500dp"
-            android:layout_below="@+id/button_laden"
-            android:layout_alignStart="@+id/button_laden" />
+            android:layout_below="@+id/button_neuesspiel"
+            android:layout_alignStart="@+id/button_neuesspiel" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
