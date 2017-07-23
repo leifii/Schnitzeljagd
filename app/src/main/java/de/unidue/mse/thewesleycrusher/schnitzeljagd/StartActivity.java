@@ -26,8 +26,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         Button start = (Button) findViewById(R.id.button_start);
         start.setOnClickListener(this);
-        Button laden = (Button) findViewById(R.id.button_laden);
-        laden.setOnClickListener(this);
         Button anleitung = (Button) findViewById(R.id.button_anleitung);
         anleitung.setOnClickListener(this);
         Button neuesspiel = (Button) findViewById(R.id.button_neuesspiel );
@@ -81,10 +79,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 //startActivity(new Intent(this, AuswahlRouteActivity.class));
                 Intent intent = new Intent(StartActivity.this, AuswahlRouteActivity.class);
                 startActivity(intent);
-                break;
-
-            case R.id.button_laden:
-                startActivity(new Intent(StartActivity.this, MapsActivity.class));
                 break;
 
             case R.id.button_anleitung:
