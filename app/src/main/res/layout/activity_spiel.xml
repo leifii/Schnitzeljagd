@@ -110,4 +110,23 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/btnMap"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnShowPicture"
+        android:layout_alignStart="@+id/btnShowPicture"
+
+        android:layout_centerHorizontal="true"
+        android:text="Map" />
+
+    <Button
+        android:id="@+id/btnDeleteSavegame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btnMap"
+        android:text="Button" />
+
 </RelativeLayout>

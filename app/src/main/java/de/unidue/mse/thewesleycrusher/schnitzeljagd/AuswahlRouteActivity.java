@@ -35,7 +35,7 @@ public class AuswahlRouteActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         textView = (TextView) findViewById(R.id.textSpielLaden);
 
-        myDir= Environment.getExternalStorageDirectory().getAbsolutePath()+"/schnitzeljagd";
+        myDir= Environment.getExternalStorageDirectory().getAbsolutePath()+"/schnitzeljagd/routen";
 
         File file;
 
@@ -53,7 +53,7 @@ public class AuswahlRouteActivity extends AppCompatActivity {
 
         if(file.isDirectory()){
             list = file.list();
-            //textView.setText(directoryFound);
+            textView.setText(myDir);
         }
         if(list==null){
             Toast.makeText(this, "list is null", Toast.LENGTH_SHORT);
@@ -62,7 +62,9 @@ public class AuswahlRouteActivity extends AppCompatActivity {
             //textView.setText(directoryFound+"\n"+listNotNull);
             MyFiles myFilesArray[] = new MyFiles[list.length];
             for(int i = 0; i<list.length;i++){
-                myFilesArray[i] = new MyFiles(list[i]);
+               // if(!list[i].equals("tmpFileJagd")) {
+                    myFilesArray[i] = new MyFiles(list[i]);
+                //  }
             }
             //Toast.makeText(this, "asdf", Toast.LENGTH_SHORT);
             //textView.setText(directoryFound+"\n"+listNotNull+": "+list.length+"length"+"MyFiles.length: "+myFilesArray.length);

@@ -23,12 +23,14 @@ public class Gamefileloader {
     private String hint;
     private boolean inHint = true;
 
-    Gamefileloader(String path, Gamefile gamefile){
-        this.toLoad = new File(path);
-        this.gameFile=gamefile;
+    Gamefileloader(){
+
     }
 
-    public void loadGamefile(){
+    public void loadGamefile(String path, Gamefile gamefile){
+
+        this.toLoad=new File(path);
+        this.gameFile=gamefile;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(toLoad));
@@ -42,11 +44,17 @@ public class Gamefileloader {
                     line=reader.readLine();
                     line=reader.readLine();
                 }
+                if(line==null){
+                    break;
+                }
                 if(line.equals("<Longitude1>")){
                     line=reader.readLine();
                     gameFile.setLongitude1(Double.parseDouble(line));
                     line=reader.readLine();
                     line=reader.readLine();
+                }
+                if(line==null){
+                    break;
                 }
                 if(line.equals("<Longitude2>")){
                     line=reader.readLine();
@@ -60,11 +68,17 @@ public class Gamefileloader {
                     line=reader.readLine();
                     line=reader.readLine();
                 }
+                if(line==null){
+                    break;
+                }
                 if(line.equals("<Longitude4>")){
                     line=reader.readLine();
                     gameFile.setLongitude4(Double.parseDouble(line));
                     line=reader.readLine();
                     line=reader.readLine();
+                }
+                if(line==null){
+                    break;
                 }
                 if(line.equals("<Longitude5>")){
                     line=reader.readLine();
@@ -72,11 +86,17 @@ public class Gamefileloader {
                     line=reader.readLine();
                     line=reader.readLine();
                 }
+                if(line==null){
+                    break;
+                }
                 if(line.equals("<Latitude1>")){
                     line=reader.readLine();
                     gameFile.setLatitude1(Double.parseDouble(line));
                     line=reader.readLine();
                     line=reader.readLine();
+                }
+                if(line==null){
+                    break;
                 }
                 if(line.equals("<Latitude2>")){
                     line=reader.readLine();
@@ -84,11 +104,17 @@ public class Gamefileloader {
                     line=reader.readLine();
                     line=reader.readLine();
                 }
+                if(line==null){
+                    break;
+                }
                 if(line.equals("<Latitude3>")){
                     line=reader.readLine();
                     gameFile.setLatitude3(Double.parseDouble(line));
                     line=reader.readLine();
                     line=reader.readLine();
+                }
+                if(line==null){
+                    break;
                 }
                 if(line.equals("<Latitude4>")){
                     line=reader.readLine();
@@ -96,11 +122,17 @@ public class Gamefileloader {
                     line=reader.readLine();
                     line=reader.readLine();
                 }
+                if(line==null){
+                    break;
+                }
                 if(line.equals("<Latitude5>")){
                     line=reader.readLine();
                     gameFile.setLatitude5(Double.parseDouble(line));
                     line=reader.readLine();
                     line=reader.readLine();
+                }
+                if(line==null){
+                    break;
                 }
 
 
@@ -257,6 +289,28 @@ public class Gamefileloader {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+    }
+
+    public int loadSaveFile(String path){
+        int i = 0;
+        this.toLoad = new File(path);
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(toLoad));
+            String line = reader.readLine();
+
+            if(line!=null){
+                i= Integer.valueOf(line);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return i;
 
     }
 

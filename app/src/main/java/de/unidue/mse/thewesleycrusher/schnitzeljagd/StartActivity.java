@@ -17,6 +17,8 @@ import java.io.File;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private String mainDirectoryPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +52,21 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         //Check wether Directory to save data to exists, if it does not exist, it will be created
 
 
-        String myDirectoryPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        File directory = new File(myDirectoryPath, "Schnitzeljagd");
-        if(!directory.exists()){
-            directory.mkdir();
+
+        File mainDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "Schnitzeljagd");
+
+        if(!mainDirectory.exists()){
+            mainDirectory.mkdir();
+        }
+        mainDirectoryPath = mainDirectory.getAbsolutePath();
+
+        File routsDirectory = new File(mainDirectoryPath, "Routen");
+        if(!routsDirectory.exists()){
+            routsDirectory.mkdir();
+        }
+        File saveFilesDirectory = new File(mainDirectoryPath, "Savefiles");
+        if(!saveFilesDirectory.exists()){
+            saveFilesDirectory.mkdir();
         }
 
     }
