@@ -22,40 +22,17 @@
         android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textCurrentLocationSpiel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/textCurrentGame"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@id/textCurrentGame"
-        android:layout_below="@+id/textCurrentGame"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    <TextView
-        android:id="@+id/textTargetLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignEnd="@id/textCurrentLocationSpiel"
-        android:layout_alignRight="@id/textCurrentLocationSpiel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/textCurrentLocationSpiel"
-        android:text=""  />
-
 
     <TextView
         android:id="@+id/textDebug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignEnd="@id/textTargetLocation"
-        android:layout_alignRight="@id/textTargetLocation"
+        android:layout_alignEnd="@id/textCurrentGame"
+        android:layout_alignRight="@id/textCurrentGame"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/textTargetLocation"
+        android:layout_below="@id/textCurrentGame"
         android:text=""  />
 
     <TextView
@@ -69,19 +46,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/textDebug"
         android:text=""  />
-
-    <TextView
-        android:id="@+id/textDistanceToTargetLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignEnd="@id/textCheckpointLocation"
-        android:layout_alignRight="@id/textCheckpointLocation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/textCheckpointLocation"
-        android:text=""  />
-
 
 
     <Button
