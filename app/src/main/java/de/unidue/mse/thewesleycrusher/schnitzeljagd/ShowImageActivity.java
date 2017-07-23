@@ -33,7 +33,6 @@ public class ShowImageActivity extends AppCompatActivity {
 
         if(imgFile.exists()){
 
-
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
             myImage = (ImageView) findViewById(R.id.imageViewShowPictureHint);

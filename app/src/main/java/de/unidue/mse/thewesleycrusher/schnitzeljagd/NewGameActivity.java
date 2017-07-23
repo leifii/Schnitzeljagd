@@ -241,8 +241,11 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
 
         myLastLocation = new Location("schnitzeljagd");
-        myLastLocation.set(locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER));
 
+
+        if(locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null) {
+            myLastLocation.set(locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER));
+        }
         //checkPem();
 
         Toast.makeText(this, "Bitte warte, bis dein Aufenhaltsort erfasst wurde.", Toast.LENGTH_SHORT).show();
