@@ -6,80 +6,86 @@
     android:layout_height="match_parent"
     tools:context="de.unidue.mse.thewesleycrusher.schnitzeljagd.StartActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="0dp"
-        android:layout_height="800dp"
-        android:orientation="vertical"
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center|fill_vertical"
+        tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="0dp"
-        android:weightSum="1">
+        android:paddingTop="20dp">
 
-
-
-        <LinearLayout
-            android:layout_width="385dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="80dp"
-            android:layout_weight="0.65"
-            android:baselineAligned="true"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="220dp"
+            android:layout_height="164dp"
+            android:layout_below="@+id/guideline"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_marginTop="17dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            tools:layout_editor_absoluteX="82dp"
+            tools:layout_editor_absoluteY="16dp" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="220dp"
-                android:layout_height="164dp"
-                android:layout_gravity="center"
-                app:srcCompat="@mipmap/ic_launcher"
-                tools:layout_editor_absoluteX="82dp"
-                tools:layout_editor_absoluteY="16dp" />
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:text="Start"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="386dp" />
 
-            <Button
-                android:id="@+id/button_start"
-                android:layout_width="146dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Start"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="386dp" />
+        <Button
+            android:id="@+id/button_laden"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/button_start"
+            android:layout_below="@+id/button_start"
+            android:layout_gravity="center"
+            android:layout_marginTop="13dp"
+            android:text="Laden"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="231dp" />
 
-            <Button
-                android:id="@+id/button_laden"
-                android:layout_width="146dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Laden"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="231dp" />
-
-            <Button
+        <Button
             android:id="@+id/button_anleitung"
             android:layout_width="146dp"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/button_neuesspiel"
+            android:layout_below="@+id/button_neuesspiel"
             android:layout_gravity="center"
+            android:layout_marginTop="14dp"
             android:text="Anleitung"
             tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="500dp" />
 
-            <Button
-                android:id="@+id/button_neuesspiel"
-                android:layout_width="146dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Neues Spiel"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="500dp" />
+        <Button
+            android:id="@+id/button_neuesspiel"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:text="Neues Spiel"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="500dp"
+            android:layout_below="@+id/button_laden"
+            android:layout_alignStart="@+id/button_laden" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="40dp" />
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="40dp"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="0dp" />
 
-        </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 
 
 
