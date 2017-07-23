@@ -36,6 +36,7 @@ public class AuswahlRouteActivity extends AppCompatActivity {
         
         textView = (TextView) findViewById(R.id.textSpielLaden);
 
+
         myDir= Environment.getExternalStorageDirectory().getAbsolutePath()+"/schnitzeljagd/routen";
 
         File file;
