@@ -18,7 +18,7 @@ public class ForceLocationUpdates implements Runnable {
     private Location checkPointLocation, targetLocation, mLastLocation;
     private Handler handler;
     private Context context;
-    private MyLastLocation myLastLocation;
+
     private Boolean gameIsRunning=true, found=false;
     private int zielErreicht = 3;
     private int checkPointsToReach, checkPointsReached;

@@ -336,6 +336,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                         foto.setEnabled(false);
                         hinweis = editTextHinweis.getEditableText().toString();
                         speicherHinweis(step, hinweis);
+                        speicherGPS(step);
 
                     //gamefile.setName(name);
                 }
@@ -348,18 +349,14 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_setgps:
-                if(checkName())
                 {
+                    Intent intent = new Intent(this, StartActivity.class);
+                    startActivity(intent);
+                    finishAndRemoveTask();
+                    locMan.removeUpdates(locLis);
 
-                    //getLoc();
-                    //gamefile.setName(name);
-                    speicherGPS(step);
-                    String locations = "Longitude: "+String.valueOf(myLastLocation.getLongitude()) +"\nLatitude: " + String.valueOf(myLastLocation.getLatitude());
-                    Toast toast = Toast.makeText(this, locations, Toast.LENGTH_SHORT);
-                    toast.show();
                 }
-                else
-                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen" , Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.button_nextstop:
                 if(checkName()) {
@@ -423,7 +420,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                         gameFileWriter.clearTmpFile();
 
                         locMan.removeUpdates(locLis);
-                        finishAndRemoveTask();
+                        finish();
 
 
                         Intent intent = new Intent(this, StartActivity.class);
@@ -595,7 +592,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -605,6 +604,8 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     public void onBackPressed() {
 
         super.onBackPressed();
+        locMan.removeUpdates(locLis);
+        finish();
     }
 
     public void speicherGPS (int i){
