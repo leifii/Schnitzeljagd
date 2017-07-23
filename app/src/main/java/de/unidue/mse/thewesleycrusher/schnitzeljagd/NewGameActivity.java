@@ -422,6 +422,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                         gamefile = new Gamefile();
                         gameFileWriter.clearTmpFile();
 
+                        locMan.removeUpdates(locLis);
                         finishAndRemoveTask();
 
 
@@ -841,6 +842,7 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
     private void loadTempFile(){
 
         Gamefileloader gamefileloader = new Gamefileloader();
+        gamefile = new Gamefile();
         gamefileloader.loadGamefile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Schnitzeljagd/Savefiles/tmpFileJagd", gamefile);
 
         if(gamefile.getName()!=null){
