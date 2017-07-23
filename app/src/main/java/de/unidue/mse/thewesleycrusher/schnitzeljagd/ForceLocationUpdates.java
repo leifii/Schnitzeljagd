@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
 
 /**
  * Created by Tris on 14.07.2017.
@@ -20,20 +19,20 @@ public class ForceLocationUpdates implements Runnable {
     private Handler handler;
     private Context context;
     private MyLastLocation myLastLocation;
-    private Boolean gameIsRunning, found=false;
+    private Boolean gameIsRunning=true, found=false;
     private int zielErreicht = 3;
-    private int checkpointsThreshold, checkPointsReached=0;
+    private int checkPointsToReach, checkPointsReached;
 
 
-    ForceLocationUpdates(LocationManager locationManager, Location location, Location target, Location checkPoint, Handler handler, Context context, Boolean gameIsRunning, int i){
+    ForceLocationUpdates(LocationManager locationManager, Location location, Location target, Location checkPoint, Handler handler, Context context, int i, int j){
         this.locationManager=locationManager;
         this.mLastLocation=location;
         this.targetLocation=target;
         this.handler=handler;
         this.context=context;
-        this.gameIsRunning=gameIsRunning;
         this.checkPointLocation=checkPoint;
-        this.checkpointsThreshold=i;
+        this.checkPointsToReach =i;
+        this.checkPointsReached =j;
 
     }
 
@@ -42,7 +41,7 @@ public class ForceLocationUpdates implements Runnable {
     @Override
     public void run() {
 
-        while (true) {
+        while (!found) {
 
 
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -51,21 +50,21 @@ public class ForceLocationUpdates implements Runnable {
                 mLastLocation.set(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
 
 
-                if (handler != null) {
+                if (handler != null) {                           ////forciert alle 5sek update des UI
                     Message msg = handler.obtainMessage(0, 4, 0);
                     handler.sendMessage(msg);
                 }
 
 
-                if (checkPointLocation.distanceTo(mLastLocation) < 25) {
+                if (checkPointLocation.distanceTo(mLastLocation) < 25) {   ///überprüft, ob checkpoint erreicht wurde
                     Message msg = handler.obtainMessage(0, 2, 0);
                     handler.sendMessage(msg);
-                    checkPointsReached++;
+
                 }
-                if (targetLocation.distanceTo(mLastLocation) < 25 && handler != null && checkPointsReached == checkpointsThreshold) {
+                if (targetLocation.distanceTo(mLastLocation) < 25 && handler != null&&!found) { //überprüft, ob ziel erreicht wurde
                     Message msg = handler.obtainMessage(0, zielErreicht, 0);
                     handler.sendMessage(msg);
-                    gameIsRunning = false;
+                    found = true;
                 }
                 try {
                     Thread.sleep(5000);

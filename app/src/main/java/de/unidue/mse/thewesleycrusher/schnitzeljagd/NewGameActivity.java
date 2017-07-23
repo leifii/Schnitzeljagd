@@ -407,29 +407,27 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 if(checkName()) {
                     if(photoTaken){
                     if (checkHinweis()) {
-                        //gamefile.setName(name);
+
                         if (step == 1) {
                             name = editTextName.getEditableText().toString();
                             gamefile.setName(name);
                         }
-                        //gameFileWriter.writeGameFile();
+
                         hinweis = editTextHinweis.getEditableText().toString();
                         speicherHinweis(step, hinweis);
                         speicherGPS(step);
 
-                       // if (runsOnEmulator()) {
-                        //    showStringToWrite();
-                     //   } else {
-                        gameFileWriter.clearTmpFile();
+
                         gameFileWriter.writeGameFile(gamefile);
                         gamefile = new Gamefile();
+                        gameFileWriter.clearTmpFile();
+
+                        finishAndRemoveTask();
+
 
                         Intent intent = new Intent(this, StartActivity.class);
                         startActivity(intent);
                         Toast.makeText(NewGameActivity.this, "Route erstellt", Toast.LENGTH_SHORT).show();
-
-
-                        //  }
                     } else {
                         Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
                     }
@@ -885,6 +883,8 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
 
                         if(gamefile.getName()==null) {
                             textCurrentCheckpoint.setText(checkpoint+step);
+                            foto.setEnabled(true);
+                            naechster.setEnabled(true);
 
                         }
                         dialogInterface.cancel();
@@ -899,6 +899,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                         gamefile=new Gamefile();
                         editTextName.setText("Name der Route eingeben");
                         editTextHinweis.setText("Hier deinen Hinweis eingeben");
+                        step=1;
+                        textCurrentCheckpoint.setText(String.valueOf("Checkpoint: "+"\n" +step));
+
 
                         if(ContextCompat.checkSelfPermission(NewGameActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                             locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, locLis);
