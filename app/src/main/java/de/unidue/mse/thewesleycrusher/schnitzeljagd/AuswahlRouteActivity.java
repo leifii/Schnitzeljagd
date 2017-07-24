@@ -22,8 +22,7 @@ public class AuswahlRouteActivity extends AppCompatActivity {
     String myDir;
     private ListView listView;
     private TextView textView;
-    String directoryFound = "directory found", listNotNull = "list not null", everything;
-    BufferedReader reader;
+
 
     public static final String EXTRA_MESSAGE = "de.unidue.mse.thewesleycrusher.schnitzeljagd.MESSAGE";
 
@@ -61,23 +60,18 @@ public class AuswahlRouteActivity extends AppCompatActivity {
             Toast.makeText(this, "list is null", Toast.LENGTH_SHORT);
         }
         if(list!=null){
-            //textView.setText(directoryFound+"\n"+listNotNull);
+
             MyFiles myFilesArray[] = new MyFiles[list.length];
             for(int i = 0; i<list.length;i++){
-               // if(!list[i].equals("tmpFileJagd")) {
+
                     myFilesArray[i] = new MyFiles(list[i]);
-                //  }
+
             }
-            //Toast.makeText(this, "asdf", Toast.LENGTH_SHORT);
-            //textView.setText(directoryFound+"\n"+listNotNull+": "+list.length+"length"+"MyFiles.length: "+myFilesArray.length);
 
             listView = (ListView) findViewById(R.id.listView1);
 
             ArrayAdapter<MyFiles> adapter = new ArrayAdapter<MyFiles>(this, android.R.layout.simple_list_item_1, myFilesArray);
             listView.setAdapter(adapter);
-
-
-
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
