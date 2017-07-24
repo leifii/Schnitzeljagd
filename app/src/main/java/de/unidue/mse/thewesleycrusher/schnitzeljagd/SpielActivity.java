@@ -458,9 +458,6 @@ public class SpielActivity extends AppCompatActivity implements View.OnClickList
         if(reachedCheckpoints>0&&reachedCheckpoints<checkpointsToReach&&!targetReached) {
             gamefilewriter.saveReachedCheckpoints(gamefile, reachedCheckpoints);
         }
-
-
-
     }
 
     @Override
@@ -494,8 +491,4 @@ public class SpielActivity extends AppCompatActivity implements View.OnClickList
 
         super.onBackPressed();
     }
-
-
-
-
 }

@@ -221,11 +221,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         naechster.setEnabled(false);
 
 
-        /*
-        Button hinweis =(Button) findViewById(R.id.button_setText);
-        hinweis.setOnClickListener(this);
-        */
-
         ende = (Button) findViewById(R.id.button_abschließen);
         ende.setOnClickListener(this);
         ende.setEnabled(false);
@@ -246,19 +241,9 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
         if(locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER)!=null) {
             myLastLocation.set(locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER));
         }
-        //checkPem();
+
 
         Toast.makeText(this, "Bitte warte, bis dein Aufenhaltsort erfasst wurde.", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -341,7 +326,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                         speicherHinweis(step, hinweis);
                         speicherGPS(step);
 
-                    //gamefile.setName(name);
                 }
                 else{
                         Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
@@ -440,28 +424,6 @@ public class NewGameActivity extends Activity implements View.OnClickListener {
                 }
                 break;
 
-
-            /*
-            case R.id.button_setText:
-                Toast toast = Toast.makeText(this, "testestest", Toast.LENGTH_SHORT);
-                toast.show();
-
-
-                if(checkName()) {
-                    if (checkHinweis()) {
-                        //gamefile.setName(name);
-                        speicherHinweis(step, hinweis);
-                    } else {
-                        Toast.makeText(NewGameActivity.this, "Verfasse einen Hinweis", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    Toast.makeText(NewGameActivity.this, "Bitte gebe dem Spiel einen Namen", Toast.LENGTH_SHORT).show();
-                }
-
-
-                break;
-                */
         }
 
     }
